@@ -138,5 +138,12 @@
     "image": "20.jpg",
     "genre": "horror",
     "rating": "7.4"
+  },
+  {
+    "id": 21,
+    "title": "The Last Stand",
+    "image": "21.jpg",
+    "genre": "action",
+    "rating": "8.2"
   }
 ]
