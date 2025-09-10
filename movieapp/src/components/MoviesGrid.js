@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles.css";
 import MovieCard from "./MovieCard";
 
-export default function MoviesGrid({ movies }) {
+export default function MoviesGrid({ movies, watchlist, toggleWatchlist }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [genre, setGenre] = useState("All Genres");
@@ -21,7 +21,10 @@ export default function MoviesGrid({ movies }) {
   };
 
   const matchesGenre = (movie, genre) => {
-    return genre === "All Genres" || movie.genre.toLowerCase() === genre.toLowerCase();
+    return (
+      genre === "All Genres" ||
+      movie.genre.toLowerCase() === genre.toLowerCase()
+    );
   };
 
   const matchesSearchTerm = (movie, searchTerm) => {
@@ -43,8 +46,11 @@ export default function MoviesGrid({ movies }) {
     }
   };
 
-  const filteredMovies = movies.filter((movie) =>
-    matchesSearchTerm(movie, searchTerm) && matchesGenre(movie, genre) && matchesRating(movie, rating)
+  const filteredMovies = movies.filter(
+    (movie) =>
+      matchesSearchTerm(movie, searchTerm) &&
+      matchesGenre(movie, genre) &&
+      matchesRating(movie, rating)
   );
 
   return (
@@ -88,7 +94,12 @@ export default function MoviesGrid({ movies }) {
       </div>
       <div className="movies-grid">
         {filteredMovies.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+          <MovieCard
+            movie={movie}
+            key={movie.id}
+            isWatchlisted={watchlist.includes(movie.id)}
+            toggleWatchlist={toggleWatchlist}
+          />
         ))}
       </div>
     </div>
