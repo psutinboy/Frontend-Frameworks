@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "rating": 8.3,
+    "image": "to-kill-a-mockingbird.jpg",
+    "description": "A gripping tale of racial injustice and childhood innocence in the American South."
+  },
+  {
+    "id": 2,
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "rating": 8.7,
+    "image": "1984.png",
+    "description": "A chilling vision of a totalitarian future where Big Brother watches everything."
+  },
+  {
+    "id": 3,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "rating": 8.1,
+    "image": "pride-and-prejudice.jpeg",
+    "description": "A witty and romantic tale of love overcoming social prejudices."
+  },
+  {
+    "id": 4,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "rating": 7.8,
+    "image": "the-great-gatsby.jpeg",
+    "description": "A tragic story of love, wealth, and the American Dream in the Jazz Age."
+  },
+  {
+    "id": 5,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "genre": "Fantasy",
+    "rating": 8.5,
+    "image": "harry-potter-1.jpg",
+    "description": "A young wizard discovers his magical heritage and begins his journey at Hogwarts."
+  },
+  {
+    "id": 6,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": "Fiction",
+    "rating": 7.2,
+    "image": "the-catcher-in-the-rye.jpg",
+    "description": "A teenager's cynical journey through New York City after being expelled from prep school."
+  },
+  {
+    "id": 7,
+    "title": "Lord of the Rings: The Fellowship of the Ring",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "rating": 8.9,
+    "image": "lotr-fellowship.jpg",
+    "description": "An epic quest begins as a hobbit must destroy a powerful ring to save Middle-earth."
+  },
+  {
+    "id": 8,
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "genre": "Dystopian",
+    "rating": 7.6,
+    "image": "the-hunger-games.jpg",
+    "description": "A girl volunteers to take her sister's place in a deadly televised competition."
+  },
+  {
+    "id": 9,
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "Science Fiction",
+    "rating": 8.4,
+    "image": "dune.jpg",
+    "description": "A complex tale of politics, religion, and ecology on a desert planet."
+  },
+  {
+    "id": 10,
+    "title": "The Handmaid's Tale",
+    "author": "Margaret Atwood",
+    "genre": "Dystopian",
+    "rating": 8.0,
+    "image": "handmaids-tale.jpg",
+    "description": "A haunting vision of a future where women's rights have been stripped away."
+  },
+  {
+    "id": 11,
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "genre": "Thriller",
+    "rating": 7.9,
+    "image": "gone-girl.jpg",
+    "description": "A psychological thriller about a marriage gone terribly wrong."
+  },
+  {
+    "id": 12,
+    "title": "The Girl with the Dragon Tattoo",
+    "author": "Stieg Larsson",
+    "genre": "Mystery",
+    "rating": 8.2,
+    "image": "dragon-tattoo.jpg",
+    "description": "A journalist and a hacker investigate a decades-old disappearance."
+  },
+  {
+    "id": 13,
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "genre": "Dystopian",
+    "rating": 7.7,
+    "image": "brave-new-world.jpg",
+    "description": "A society where happiness is manufactured and individuality is suppressed."
+  },
+  {
+    "id": 14,
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "genre": "Romance",
+    "rating": 7.4,
+    "image": "fault-in-our-stars.jpg",
+    "description": "Two teenagers with cancer fall in love and face life's challenges together."
+  },
+  {
+    "id": 15,
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "genre": "Thriller",
+    "rating": 6.8,
+    "image": "da-vinci-code.jpg",
+    "description": "A symbologist uncovers a religious conspiracy hidden in famous artworks."
+  },
+  {
+    "id": 16,
+    "title": "Where the Crawdads Sing",
+    "author": "Delia Owens",
+    "genre": "Mystery",
+    "rating": 8.1,
+    "image": "crawdads-sing.jpg",
+    "description": "A coming-of-age story about a girl who grows up isolated in the marshes."
+  },
+  {
+    "id": 17,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": "Fiction",
+    "rating": 7.5,
+    "image": "the-alchemist.jpg",
+    "description": "A shepherd boy's journey to find treasure leads to self-discovery."
+  },
+  {
+    "id": 18,
+    "title": "Educated",
+    "author": "Tara Westover",
+    "genre": "Biography",
+    "rating": 8.6,
+    "image": "educated.jpg",
+    "description": "A memoir about education, family, and the struggle between loyalty and independence."
+  },
+  {
+    "id": 19,
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "genre": "Thriller",
+    "rating": 7.3,
+    "image": "silent-patient.jpg",
+    "description": "A psychotherapist becomes obsessed with treating a woman who refuses to speak."
+  },
+  {
+    "id": 20,
+    "title": "Circe",
+    "author": "Madeline Miller",
+    "genre": "Fantasy",
+    "rating": 8.3,
+    "image": "circe.jpg",
+    "description": "The story of the Greek goddess Circe and her journey from outcast to powerful witch."
+  }
+]
