@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="app-footer">
       <div className="footer-content">
-        <p>&copy; 2024 BookHub. Made with ❤️ for book lovers.</p>
+        <p>&copy; {new Date().getFullYear()} BookHub.</p>
         <div className="footer-links">
           <a href="#about" className="footer-link">
             About
