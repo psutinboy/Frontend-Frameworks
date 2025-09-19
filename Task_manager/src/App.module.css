@@ -1,0 +1,48 @@
+/* App.module.css */
+
+.App {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .taskForm {
+    margin-bottom: 20px;
+  }
+  
+  input, select,button {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .taskList {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+  }
+
+  .flexContainer {
+    display: flex;
+    background-color: DodgerBlue;
+  }
+
+  /* Define light and dark theme styles in App.module.css. */
+
+  .lightTheme {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .darkTheme {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  /* These styles apply based on the current theme value. */
+  
