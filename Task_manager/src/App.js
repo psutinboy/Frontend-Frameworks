@@ -13,7 +13,7 @@ function App() {
   const [taskInput, setTaskInput] = useState({
     title: "",
     priority: "Medium",
-    dueDate: "",
+    dueDate: new Date().toISOString().split("T")[0],
     category: "Select Category",
   });
 
@@ -71,7 +71,7 @@ function App() {
       setTaskInput({
         title: "",
         priority: "Medium",
-        dueDate: "",
+        dueDate: new Date().toISOString().split("T")[0],
         category: "Select Category",
       }); // Reset form
       setCategoryError(false); // Reset error state on successful add
@@ -191,7 +191,6 @@ function App() {
               onChange={handleInputChange}
               style={{
                 border: categoryError ? "2px solid red" : "",
-                backgroundColor: categoryError ? "#ffebee" : "",
               }}
             >
               <option value="Select Category" disabled>
