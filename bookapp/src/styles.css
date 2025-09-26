@@ -5,6 +5,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: auto;
 }
 
 /* Header Styles */
@@ -210,6 +211,7 @@
 /* Main Container */
 .books-container {
   max-width: 1200px;
+  width: auto;
   margin: 0 auto;
   padding: 20px;
 }
