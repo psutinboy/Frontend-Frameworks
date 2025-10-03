@@ -31,7 +31,7 @@ app.post("/", async (req, res) => {
     const { title, priority, dueDate } = req.body;
 
     if (!title) {
-      res.status(400).json({ message: "Title is empty" });
+      return res.status(400).json({ message: "Title is empty" });
     }
 
     const newTask = new Task({ title, priority, dueDate });
