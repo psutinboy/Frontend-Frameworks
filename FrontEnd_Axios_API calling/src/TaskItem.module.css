@@ -1,0 +1,52 @@
+/* TaskItem.module.css */
+
+.taskItem {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  text-align: left;
+}
+
+.deleteBtn {
+  position: relative;
+  top: 0;
+  right: 0;
+  display: none;
+}
+
+.taskItem:hover .deleteBtn {
+  display: block;
+}
+
+.completed {
+  background-color: #e0ffe0;
+  text-decoration: line-through;
+}
+
+.highPriority {
+  color: red;
+}
+
+.mediumPriority {
+  color: orange;
+}
+
+.lowPriority {
+  color: green;
+}
+
+/* Define theme-specific styles for TaskItem.module.css. */
+
+.lightItem {
+  background-color: #f9f9f9;
+  color: #000000;
+}
+
+.darkItem {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+/* These styles will apply depending on the selected theme. */
