@@ -1,0 +1,101 @@
+/* UserItem.module.css */
+
+.userItem {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.userItem h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.userItem p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.deleteBtn:hover {
+  background-color: #da190b;
+}
+
+.editBtn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.editBtn:hover {
+  background-color: #0b7dda;
+}
+
+/* Edit mode styles */
+.editInput {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.editButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.saveBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.saveBtn:hover {
+  background-color: #45a049;
+}
+
+.cancelBtn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.cancelBtn:hover {
+  background-color: #da190b;
+}

@@ -1,11 +1,21 @@
 const { default: mongoose } = require("mongoose");
 
-const userSchhema = new mongoose.Schema({
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: false },
+const userSchhema = new mongoose.Schema(
+  {
+    firstname: { type: String, required: false },
+    lastname: { type: String, required: false },
     email: { type: String, required: true },
+    password: { type: String, required: false },
+    age: { type: Number, required: false },
+    city: { type: String, required: false },
+    verified: { type: Boolean, default: false },
+    posts: { type: Array, default: [] },
+    role: { type: String, required: false },
+    refreshToken: { type: String, required: false },
     address: { type: String, required: false },
-    mobile: { type: Number, required: true }
-})
+    mobile: { type: Number, required: false },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', userSchhema);
+module.exports = mongoose.model("User", userSchhema);

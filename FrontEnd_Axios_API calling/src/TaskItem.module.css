@@ -50,3 +50,61 @@
 }
 
 /* These styles will apply depending on the selected theme. */
+
+/* Edit mode styles */
+.editInput,
+.editSelect {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.editButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.saveBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.saveBtn:hover {
+  background-color: #45a049;
+}
+
+.cancelBtn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cancelBtn:hover {
+  background-color: #da190b;
+}
+
+.editBtn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.editBtn:hover {
+  background-color: #0b7dda;
+}
