@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = ({ setAuth }) => {
   const [username, setUsername] = useState("");
@@ -79,6 +79,11 @@ const Login = ({ setAuth }) => {
           Login
         </button>
       </form>
+
+      <p className="register-link">
+        Don't have an account?{" "}
+        <span onClick={() => navigate("/register")}>Create one here</span>
+      </p>
     </div>
   );
 };

@@ -8,17 +8,41 @@ const User = require("../userModel");
 
 // Register Route
 router.post("/register", async (req, res) => {
-  const { email, password, role, firstName, mobile } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({
-    email,
-    password: hashedPassword,
-    role,
-    firstName,
-    mobile,
-  });
-  await user.save();
-  res.status(201).json({ message: "User created successfully" });
+  try {
+    const { email, password, role, firstName, mobile } = req.body;
+
+    // Validate role: must be 1 (Admin), 2 (Customer), or 3 (Worker)
+    if (!role || ![1, 2, 3].includes(parseInt(role))) {
+      return res.status(400).json({
+        message:
+          "Invalid role. Role must be 1 (Admin), 2 (Customer), or 3 (Worker)",
+      });
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      email,
+      password: hashedPassword,
+      role: parseInt(role),
+      firstName,
+      mobile,
+    });
+    await user.save();
+    res.status(201).json({ message: "User created successfully" });
+  } catch (error) {
+    console.error("Registration error:", error);
+    res
+      .status(500)
+      .json({ message: "Error creating user", error: error.message });
+  }
 });
 
 router.post("/login", async (req, res) => {

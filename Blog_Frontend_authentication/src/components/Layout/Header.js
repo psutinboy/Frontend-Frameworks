@@ -1,14 +1,15 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getRoleName, getUserFromToken, hasRole } from "../../utils/roleCheck";
 
 const Header = () => {
-  const isAuthenticated = true; // Replace with your authentication logic
+  const isAuthenticated = !!localStorage.getItem("user");
   const navigate = useNavigate();
+  const user = getUserFromToken();
 
   const handleLogout = () => {
-    // Add your logout logic here
     localStorage.clear();
-    alert("Logged out!");
+    alert("Logged out successfully!");
     navigate("/login");
   };
 
@@ -34,13 +35,29 @@ const Header = () => {
                 <Link to="/add-blog">Add Blog</Link>
               </li>
               <li>
-                <button onClick={handleLogout} className="logout-btn">Logout</button>
+                <Link to="/profile">Profile</Link>
+              </li>
+              {/* Show Admin Panel link only to Admins */}
+              {hasRole([1]) && (
+                <li>
+                  <Link to="/admin">Admin Panel</Link>
+                </li>
+              )}
+              <li>
+                <button onClick={handleLogout} className="logout-btn">
+                  Logout {user && `(${getRoleName(user.role)})`}
+                </button>
               </li>
             </>
           ) : (
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>
