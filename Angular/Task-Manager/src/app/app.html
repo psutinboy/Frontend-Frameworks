@@ -1,0 +1,28 @@
+<div class="app-wrapper">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">
+        <i class="icon-check"></i>
+        TaskMaster Pro
+      </h1>
+      <nav class="nav">
+        <a routerLink="/dashboard" routerLinkActive="active" class="nav-link"> Dashboard </a>
+        <a routerLink="/tasks" routerLinkActive="active" class="nav-link"> Tasks </a>
+        <a routerLink="/profile" routerLinkActive="active" class="nav-link"> Profile </a>
+      </nav>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 TaskMaster Pro. Built with Angular 19</p>
+    </div>
+  </footer>
+</div>
