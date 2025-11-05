@@ -1,0 +1,94 @@
+<div class="stats-container">
+  <div class="stats-header">
+    <h2>Productivity Statistics</h2>
+    <button class="btn btn-refresh" (click)="loadStats()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+      </svg>
+      Refresh
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <p>Loading statistics...</p>
+    </div>
+  } @else if (stats()) {
+    <!-- Summary Cards -->
+    <div class="stats-summary">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          🍅
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ stats()!.totalPomodoros }}</div>
+          <div class="stat-label">Total Pomodoros</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%);">
+          ⏱️
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getTotalFocusTime() }}</div>
+          <div class="stat-label">Total Focus Time</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+          🎯
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ stats()!.taskCompletionRate | number:'1.0-0' }}%</div>
+          <div class="stat-label">Task Completion</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+          🔥
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ stats()!.streak }}</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+          ⭐
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ statsService.getMostProductiveHourFormatted() }}</div>
+          <div class="stat-label">Most Productive Hour</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <canvas #dailyChart></canvas>
+      </div>
+
+      <div class="chart-card">
+        <canvas #weeklyChart></canvas>
+      </div>
+
+      <div class="chart-card monthly-chart">
+        <canvas #monthlyChart></canvas>
+      </div>
+
+      <div class="chart-card chart-card-wide">
+        <canvas #hourlyChart></canvas>
+      </div>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <p>No statistics available yet. Complete some pomodoro sessions to see your progress!</p>
+    </div>
+  }
+</div>
+

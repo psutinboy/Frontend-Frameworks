@@ -1,0 +1,158 @@
+<div class="task-list-container">
+  <div class="task-list-header">
+    <h2>Tasks</h2>
+    <button class="btn btn-add" (click)="toggleAddForm()">
+      @if (showAddForm()) {
+        <span>Cancel</span>
+      } @else {
+        <span>+ Add Task</span>
+      }
+    </button>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    <button
+      class="filter-tab"
+      [class.active]="currentFilter() === 'all'"
+      (click)="setFilter('all')"
+    >
+      All
+    </button>
+    <button
+      class="filter-tab"
+      [class.active]="currentFilter() === 'active'"
+      (click)="setFilter('active')"
+    >
+      Active
+    </button>
+    <button
+      class="filter-tab"
+      [class.active]="currentFilter() === 'completed'"
+      (click)="setFilter('completed')"
+    >
+      Completed
+    </button>
+  </div>
+
+  <!-- Add/Edit Task Form -->
+  @if (showAddForm() || editingTaskId()) {
+    <div class="task-form">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Task title"
+            [value]="taskTitle()"
+            (input)="taskTitle.set($any($event.target).value)"
+            required
+          />
+        </div>
+        <div class="form-row">
+          <textarea
+            class="form-input"
+            placeholder="Description (optional)"
+            rows="2"
+            [value]="taskDescription()"
+            (input)="taskDescription.set($any($event.target).value)"
+          ></textarea>
+        </div>
+        <div class="form-row form-row-inline">
+          <label for="pomodoros">Estimated Pomodoros:</label>
+          <input
+            type="number"
+            id="pomodoros"
+            class="form-input-small"
+            min="1"
+            [value]="estimatedPomodoros()"
+            (input)="estimatedPomodoros.set(+$any($event.target).value)"
+          />
+          <div class="form-actions">
+            @if (editingTaskId()) {
+              <button type="button" class="btn btn-cancel" (click)="cancelEdit()">
+                Cancel
+              </button>
+            }
+            <button type="submit" class="btn btn-save">
+              @if (editingTaskId()) {
+                <span>Update</span>
+              } @else {
+                <span>Add</span>
+              }
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  }
+
+  <!-- Task List -->
+  <div class="tasks">
+    @if (tasks().length === 0) {
+      <div class="empty-state">
+        <p>No tasks found. Add your first task to get started!</p>
+      </div>
+    }
+
+    @for (task of tasks(); track task._id) {
+      <div class="task-item" [class.completed]="task.isCompleted">
+        <div class="task-checkbox">
+          <input
+            type="checkbox"
+            [checked]="task.isCompleted"
+            (change)="toggleComplete(task._id)"
+          />
+        </div>
+        
+        <div class="task-content">
+          <h3 class="task-title">{{ task.title }}</h3>
+          @if (task.description) {
+            <p class="task-description">{{ task.description }}</p>
+          }
+          
+          <div class="task-progress">
+            <div class="progress-info">
+              <span class="pomodoro-count">
+                🍅 {{ task.completedPomodoros }} / {{ task.estimatedPomodoros }}
+              </span>
+              <span class="progress-percentage">
+                {{ getProgressPercentage(task) | number:'1.0-0' }}%
+              </span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                [style.width.%]="getProgressPercentage(task)"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-actions">
+          <button
+            class="action-btn edit-btn"
+            (click)="startEdit(task)"
+            title="Edit"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+          <button
+            class="action-btn delete-btn"
+            (click)="deleteTask(task._id)"
+            title="Delete"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
