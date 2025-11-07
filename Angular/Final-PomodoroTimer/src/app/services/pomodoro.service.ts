@@ -1,9 +1,10 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, interval, Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CreatePomodoroRequest, PomodoroType } from '../models/pomodoro-session.model';
 import { TaskService } from './task.service';
+import { SoundService } from './sound.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +27,12 @@ export class PomodoroService {
   workSessionsCompleted = signal<number>(0);
 
   private timerSubscription?: Subscription;
-  private audio = new Audio();
+  private soundService = inject(SoundService);
 
   constructor(
     private http: HttpClient,
     private taskService: TaskService
-  ) {
-    this.audio.src = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZTRQPV6zn77BdGAg+ltrzxXIoBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBQ==';
-  }
+  ) {}
 
   start(): void {
     if (this.isRunning()) return;
@@ -152,11 +151,7 @@ export class PomodoroService {
   }
 
   private playNotification(): void {
-    try {
-      this.audio.play().catch(err => console.log('Audio play failed:', err));
-    } catch (error) {
-      console.log('Audio notification error:', error);
-    }
+    this.soundService.playNotificationSound();
   }
 
   private createPomodoroSession(request: CreatePomodoroRequest): Observable<any> {

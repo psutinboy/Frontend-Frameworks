@@ -1,0 +1,30 @@
+---
+description: rule for security
+alwaysApply: true
+---
+
+# OWASP Top 10 Security Guidelines
+
+## Code Security Requirements
+
+Ensure all code implementations are protected against the **OWASP Top 10** vulnerabilities:
+
+### Core Vulnerabilities to Address
+
+- **Broken Access Control** - Implement proper authorization checks
+- **Cryptographic Failures** - Use strong encryption and secure data transmission
+- **Injection** - Sanitize all user inputs and use parameterized queries
+- **Insecure Design** - Follow secure design principles and threat modeling
+- **Security Misconfiguration** - Maintain secure default configurations
+- **Vulnerable and Outdated Components** - Keep dependencies updated and monitored
+- **Identification and Authentication Failures** - Implement robust authentication mechanisms
+- **Software and Data Integrity Failures** - Verify software integrity and secure CI/CD pipelines
+- **Security Logging and Monitoring Failures** - Implement comprehensive logging and monitoring
+- **Server-Side Request Forgery (SSRF)** - Validate and restrict server-side requests
+
+### Implementation Standards
+
+- Validate all inputs at application boundaries
+- Apply security controls consistently across the codebase
+- Regular security testing and code reviews required
+- Document security decisions and assumptions

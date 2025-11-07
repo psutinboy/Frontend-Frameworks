@@ -3,7 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { AuthResponse, LoginRequest, RegisterRequest, User } from '../models/user.model';
+import { 
+  AuthResponse, 
+  LoginRequest, 
+  RegisterRequest, 
+  User,
+  UpdatePasswordRequest,
+  UpdateEmailRequest,
+  DeleteAccountRequest
+} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +56,41 @@ export class AuthService {
 
   getCurrentUser(): User | null {
     return this.currentUser();
+  }
+
+  getUserDetails(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`).pipe(
+      tap(user => {
+        localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        this.currentUser.set(user);
+      })
+    );
+  }
+
+  updatePassword(request: UpdatePasswordRequest): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(`${this.apiUrl}/update-password`, request);
+  }
+
+  updateEmail(request: UpdateEmailRequest): Observable<{ user: User }> {
+    return this.http.put<{ user: User }>(`${this.apiUrl}/update-email`, request).pipe(
+      tap(response => {
+        localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+        this.currentUser.set(response.user);
+      })
+    );
+  }
+
+  deleteAccount(request: DeleteAccountRequest): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/delete-account`, {
+      body: request
+    }).pipe(
+      tap(() => {
+        localStorage.removeItem(this.TOKEN_KEY);
+        localStorage.removeItem(this.USER_KEY);
+        this.currentUser.set(null);
+        this.isAuthenticated.set(false);
+      })
+    );
   }
 
   private handleAuthResponse(response: AuthResponse): void {

@@ -5,6 +5,12 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   max-height: 685px;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.task-list-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .task-list-header {
@@ -189,7 +195,7 @@ textarea.form-input {
   color: #9ca3af;
 }
 
-.task-checkbox input[type="checkbox"] {
+.task-checkbox input[type='checkbox'] {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -199,6 +205,9 @@ textarea.form-input {
 .task-content {
   flex: 1;
   min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .task-title {
@@ -206,12 +215,18 @@ textarea.form-input {
   font-size: 1.1rem;
   color: #333;
   font-weight: 600;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .task-description {
   margin: 0 0 12px 0;
   color: #666;
   font-size: 0.9rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .task-progress {
@@ -309,4 +324,3 @@ textarea.form-input {
     flex: 1;
   }
 }
-

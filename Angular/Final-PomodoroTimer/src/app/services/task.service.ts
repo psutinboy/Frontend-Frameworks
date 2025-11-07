@@ -12,11 +12,11 @@ export class TaskService {
 
   // Signal for reactive task list
   tasks = signal<Task[]>([]);
-  currentFilter = signal<TaskFilter>('all');
+  currentFilter = signal<TaskFilter>('active');
 
   constructor(private http: HttpClient) {}
 
-  getTasks(filter: TaskFilter = 'all'): Observable<Task[]> {
+  getTasks(filter: TaskFilter = 'active'): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}?filter=${filter}`).pipe(
       tap(tasks => {
         this.tasks.set(tasks);

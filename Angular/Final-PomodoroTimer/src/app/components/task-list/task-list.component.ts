@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
@@ -13,8 +13,23 @@ import { Task, TaskFilter, CreateTaskRequest, UpdateTaskRequest } from '../../mo
 })
 export class TaskListComponent implements OnInit {
   public taskService = inject(TaskService);
-  tasks = this.taskService.tasks;
   currentFilter = this.taskService.currentFilter;
+  
+  // Computed signal that sorts tasks - completed to bottom when filter is 'all'
+  tasks = computed(() => {
+    const taskList = [...this.taskService.tasks()];
+    if (this.currentFilter() === 'all') {
+      return taskList.sort((a, b) => {
+        // Completed tasks go to bottom
+        if (a.isCompleted !== b.isCompleted) {
+          return a.isCompleted ? 1 : -1;
+        }
+        // Within same status, maintain order
+        return 0;
+      });
+    }
+    return taskList;
+  });
 
   // Form state
   showAddForm = signal(false);
