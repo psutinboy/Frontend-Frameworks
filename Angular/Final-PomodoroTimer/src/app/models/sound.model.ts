@@ -8,46 +8,32 @@ export interface SoundOption {
 
 export const SOUND_OPTIONS: SoundOption[] = [
   {
-    id: 'default',
-    name: 'Default Beep',
-    description: 'Classic timer beep',
+    id: 'next-ding',
+    name: 'Next Ding',
+    description: 'Clear notification ding',
     category: 'notification',
-    path: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZTRQPV6zn77BdGAg+ltrzxXIoBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBQ=='
+    path: '/sounds/next-ding.mp3'
   },
   {
-    id: 'soft-bell',
-    name: 'Soft Bell',
-    description: 'Gentle single bell tone',
-    category: 'chime',
-    path: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
-  },
-  {
-    id: 'wind-chime',
-    name: 'Wind Chime',
-    description: 'Light, airy chime sound',
-    category: 'chime',
-    path: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
-  },
-  {
-    id: 'crystal-chime',
-    name: 'Crystal Chime',
-    description: 'Clear, crisp chime',
-    category: 'chime',
-    path: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
-  },
-  {
-    id: 'gentle-ding',
-    name: 'Gentle Ding',
-    description: 'Simple notification sound',
+    id: 'analog-timer',
+    name: 'Analog Timer',
+    description: 'Classic analog timer bell',
     category: 'notification',
-    path: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
+    path: '/sounds/analog-timer.mp3'
   },
   {
-    id: 'success-ping',
-    name: 'Success Ping',
-    description: 'Upbeat notification tone',
+    id: 'kitchen-timer',
+    name: 'Kitchen Timer',
+    description: 'Traditional kitchen timer sound',
     category: 'notification',
-    path: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
+    path: '/sounds/kitchen-timer.mp3'
+  },
+  {
+    id: 'single-chime',
+    name: 'Single Chime',
+    description: 'Gentle single chime tone',
+    category: 'chime',
+    path: '/sounds/single-chime.mp3'
   }
 ];
 

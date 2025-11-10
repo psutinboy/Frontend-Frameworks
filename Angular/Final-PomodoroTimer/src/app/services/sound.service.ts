@@ -33,7 +33,7 @@ export class SoundService {
    * Get the currently selected sound preference from localStorage
    */
   getSoundPreference(): string {
-    return localStorage.getItem(this.SOUND_PREFERENCE_KEY) || 'default';
+    return localStorage.getItem(this.SOUND_PREFERENCE_KEY) || 'next-ding';
   }
 
   /**
