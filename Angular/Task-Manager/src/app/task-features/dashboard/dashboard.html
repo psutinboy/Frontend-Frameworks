@@ -1,24 +1,32 @@
 <div class="dashboard">
   <h2>Dashboard</h2>
   <div class="stats-grid">
-    <div class="stat-card">
+    <div class="stat-card total-stat">
       <h3>Total Tasks</h3>
-      <p class="stat-number">0</p>
+      <p class="stat-number">{{ taskService.stats().total }}</p>
     </div>
-    <div class="stat-card">
+    <div class="stat-card completed-stat">
       <h3>Completed</h3>
-      <p class="stat-number">0</p>
+      <p class="stat-number">{{ taskService.stats().completed }}</p>
     </div>
-    <div class="stat-card">
+    <div class="stat-card pending-stat">
       <h3>Pending</h3>
-      <p class="stat-number">0</p>
+      <p class="stat-number">{{ taskService.stats().pending }}</p>
     </div>
-    <div class="stat-card">
+    <div class="stat-card overdue-stat">
       <h3>Overdue</h3>
-      <p class="stat-number">0</p>
+      <p class="stat-number">{{ taskService.stats().overdue }}</p>
     </div>
   </div>
+
+  <div class="stats-grid">
+    <div class="stat-card user-stat">
+      <h3>Total Users</h3>
+      <p class="stat-number">{{ userService.totalUsers() }}</p>
+    </div>
+  </div>
+
   <p class="welcome-message">
-    Welcome to TaskMaster Pro! We'll build this step by step.
+    Welcome to TaskMaster Pro! Manage your tasks and users efficiently.
   </p>
-</div><p>dashboard works!</p>
+</div>

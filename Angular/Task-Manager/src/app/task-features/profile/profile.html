@@ -1,6 +1,51 @@
-<div class="profile">
-  <h2>User Profile</h2>
-  <div class="profile-card">
-    <p>Profile functionality coming soon!</p>
+<div class="user-list-page">
+  <div class="header">
+    <h2>All Users</h2>
+    <button class="btn-primary" (click)="showForm.set(true)">
+      + Add User
+    </button>
+  </div>
+
+  <!-- User Form Modal -->
+  @if (showForm()) {
+    <app-user-form
+      [editUser]="editingUser()"
+      (onSave)="handleSaveUser($event)"
+      (onCancel)="handleCancelForm()"
+    />
+  }
+
+  <!-- User List -->
+  <div class="users">
+    @if (userService.users().length > 0) {
+      @for (user of userService.users(); track user.id) {
+        <div class="user-card">
+          <div class="user-header">
+            <div class="user-avatar">
+              {{ user.name.charAt(0).toUpperCase() }}
+            </div>
+            <div class="user-info">
+              <h3>{{ user.name }}</h3>
+              <p class="user-email">{{ user.email }}</p>
+            </div>
+          </div>
+
+          <div class="user-meta">
+            <span class="created-date">
+              Joined: {{ user.createdAt | date:'MMM dd, yyyy' }}
+            </span>
+          </div>
+
+          <div class="user-actions">
+            <button class="btn-secondary" (click)="editUser(user)">Edit</button>
+            <button class="btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="empty-state">
+        <p>No users found.</p>
+      </div>
+    }
   </div>
 </div>

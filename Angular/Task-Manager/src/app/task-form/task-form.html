@@ -1,1 +1,87 @@
-<p>task-form works!</p>
+<div class="task-form-overlay" (click)="handleClose()">
+    <div class="task-form-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editTask() ? 'Edit Task' : 'Add New Task' }}</h2>
+            <button class="close-btn" (click)="handleClose()">&times;</button>
+        </div>
+
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title *</label>
+                <input id="title" formControlName="title" placeholder="Enter task title" class="form-control" />
+                @if (taskForm.controls.title.invalid && taskForm.controls.title.touched) {
+                <span class="error-message">
+                    @if (taskForm.controls.title.errors?.['required']) {
+                    Title is required
+                    }
+                    @if (taskForm.controls.title.errors?.['minlength']) {
+                    Title must be at least 3 characters
+                    }
+                </span>
+                }
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea id="description" formControlName="description" placeholder="Enter task description" rows="4"
+                    class="form-control"></textarea>
+                @if (taskForm.controls.description.invalid && taskForm.controls.description.touched) {
+                <span class="error-message">Description is required</span>
+                }
+            </div>
+
+            <!-- Priority -->
+            <div class="form-group">
+                <label for="priority">Priority *</label>
+                <select id="priority" formControlName="priority" class="form-control">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <!-- Due Date -->
+            <div class="form-group">
+                <label for="dueDate">Due Date</label>
+                <input id="dueDate" type="date" formControlName="dueDate" class="form-control" />
+                @if (taskForm.controls.dueDate.invalid && taskForm.controls.dueDate.touched) {
+                <span class="error-message">
+                    @if (taskForm.controls.dueDate.errors?.['pastDate']) {
+                    Due date cannot be in the past
+                    }
+                </span>
+                }
+            </div>
+
+            <!-- Tags -->
+            <div class="form-group">
+                <label>Tags</label>
+                <div formArrayName="tags" class="tags-container">
+                    @for (tag of tagsArray.controls; track $index) {
+                    <div class="tag-input-group">
+                        <input [formControlName]="$index" placeholder="Tag name" class="form-control tag-input" />
+                        <button type="button" class="btn-remove-tag" (click)="removeTag($index)">
+                            &times;
+                        </button>
+                    </div>
+                    }
+                </div>
+                <button type="button" class="btn-add-tag" (click)="addTag()">
+                    + Add Tag
+                </button>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" (click)="handleClose()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-primary" [disabled]="taskForm.invalid">
+                    {{ editTask() ? 'Update' : 'Create' }} Task
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

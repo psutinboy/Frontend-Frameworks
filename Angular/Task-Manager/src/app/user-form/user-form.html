@@ -1,0 +1,53 @@
+<div class="user-form-overlay" (click)="handleClose()">
+    <div class="user-form-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editUser() ? 'Edit Profile' : 'Create User' }}</h2>
+            <button class="close-btn" (click)="handleClose()">&times;</button>
+        </div>
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input id="name" formControlName="name" placeholder="Enter name" class="form-control" />
+                @if (userForm.controls.name.invalid && userForm.controls.name.touched) {
+                <span class="error-message">
+                    @if (userForm.controls.name.errors?.['required']) {
+                    Name is required
+                    }
+                    @if (userForm.controls.name.errors?.['minlength']) {
+                    Name must be at least 2 characters
+                    }
+                </span>
+                }
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input id="email" type="email" formControlName="email" placeholder="Enter email" class="form-control" />
+                @if (userForm.controls.email.invalid && userForm.controls.email.touched) {
+                <span class="error-message">
+                    @if (userForm.controls.email.errors?.['required']) {
+                    Email is required
+                    }
+                    @if (userForm.controls.email.errors?.['email']) {
+                    Please enter a valid email address
+                    }
+                </span>
+                }
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" (click)="handleClose()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-primary" [disabled]="userForm.invalid">
+                    {{ editUser() ? 'Update' : 'Create' }} Profile
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

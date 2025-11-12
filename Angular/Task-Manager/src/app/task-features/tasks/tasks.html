@@ -1,54 +1,71 @@
 <div class="task-list-page">
-  <div class="header">
-    <h2>All Tasks</h2>
-    <button class="btn-primary" (click)="showAddForm.set(true)">+ Add Task</button>
-  </div>
-  <!-- Task Filter -->
-  <div class="filters">
-    <button (click)="filter.set('all')" [class.active]="filter() === 'all'">
-      All ({{ taskService.tasks().length }})
-    </button>
-    <button (click)="filter.set('pending')" [class.active]="filter() === 'pending'">
-      Pending ({{ taskService.pendingTasks().length }})
-    </button>
-    <button (click)="filter.set('completed')" [class.active]="filter() === 'completed'">
-      Completed ({{ taskService.completedTasks().length }})
-    </button>
-  </div>
-  <!-- Task List -->
-  <div class="tasks">
-    @if (filteredTasks().length > 0) { @for (task of filteredTasks(); track task.id) {
-    <div class="task-card" [class.completed]="task.completed">
-      <div class="task-header">
-        <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)" />
-        <h3>{{ task.title }}</h3>
-        <span class="priority-badge" [class]="'priority-' + task.priority">
-          {{ task.priority }}
-        </span>
+      <div class="header">
+        <h2>All Tasks</h2>
+        <button class="btn-primary" (click)="showForm.set(true)">
+          + Add Task
+        </button>
       </div>
 
-      <p class="task-description">{{ task.description }}</p>
+      <!-- Task Form Modal -->
+      @if (showForm()) {
+        <app-task-form
+          [editTask]="editingTask()"
+          (onSave)="handleSaveTask($event)"
+          (onCancel)="handleCancelForm()"
+        />
+      }
 
-      <div class="task-meta">
-        @if (task.dueDate) {
-        <span class="due-date"> Due: {{ task.dueDate | date : 'MMM dd, yyyy' }} </span>
-        }
-        <div class="task-tags">
-          @for (tag of task.tags; track tag) {
-          <span class="tag">{{ tag }}</span>
-          }
+    <!-- Task Filter -->
+    <div class="filters">
+        <button (click)="filter.set('all')" [class.active]="filter() === 'all'">
+            All ({{ taskService.tasks().length }})
+        </button>
+        <button (click)="filter.set('pending')" [class.active]="filter() === 'pending'">
+            Pending ({{ taskService.pendingTasks().length }})
+        </button>
+        <button (click)="filter.set('completed')" [class.active]="filter() === 'completed'">
+            Completed ({{ taskService.completedTasks().length }})
+        </button>
+    </div>
+
+    <!-- Task List -->
+    <div class="tasks">
+        @if (filteredTasks().length > 0) {
+        @for (task of filteredTasks(); track task.id) {
+        <div class="task-card" [class.completed]="task.completed">
+            <div class="task-header">
+                <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)" />
+                <h3>{{ task.title }}</h3>
+                <span class="priority-badge" [class]="'priority-' + task.priority">
+                    {{ task.priority }}
+                </span>
+            </div>
+
+            <p class="task-description">{{ task.description }}</p>
+
+            <div class="task-meta">
+                @if (task.dueDate) {
+                <span class="due-date">
+                    Due: {{ task.dueDate | date:'MMM dd, yyyy' }}
+                </span>
+                }
+                <div class="task-tags">
+                    @for (tag of task.tags; track tag) {
+                    <span class="tag">{{ tag }}</span>
+                    }
+                </div>
+            </div>
+
+            <div class="task-actions">
+                <button class="btn-secondary" (click)="editTask(task)">Edit</button>
+                <button class="btn-danger" (click)="deleteTask(task.id)">Delete</button>
+            </div>
         </div>
-      </div>
-
-      <div class="task-actions">
-        <button class="btn-secondary" (click)="editTask(task)">Edit</button>
-        <button class="btn-danger" (click)="deleteTask(task.id)">Delete</button>
-      </div>
+        }
+        } @else {
+        <div class="empty-state">
+            <p>No {{ filter() }} tasks found.</p>
+        </div>
+        }
     </div>
-    } } @else {
-    <div class="empty-state">
-      <p>No {{ filter() }} tasks found.</p>
-    </div>
-    }
-  </div>
 </div>
