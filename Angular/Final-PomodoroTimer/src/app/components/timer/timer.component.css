@@ -189,6 +189,102 @@
   height: 20px;
 }
 
+/* Volume Control */
+.volume-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  padding: 14px 24px;
+}
+
+.volume-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+}
+
+.volume-slider-container {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+.volume-slider-container.visible {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: all;
+}
+
+.volume-slider {
+  width: 120px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #e5e7eb 0%, #667eea 100%);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #764ba2;
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  background: #764ba2;
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.volume-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .timer-circle-container {
@@ -203,6 +299,10 @@
   .control-btn {
     padding: 12px 18px;
     font-size: 0.9rem;
+  }
+
+  .volume-control {
+    display: none;
   }
 }
 

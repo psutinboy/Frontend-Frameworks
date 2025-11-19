@@ -7,6 +7,20 @@
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  position: relative;
+}
+
+.task-list-container.show-top-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), inset 0 20px 20px -12px rgba(0, 0, 0, 0.3);
+}
+
+.task-list-container.show-bottom-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), inset 0 -20px 20px -12px rgba(0, 0, 0, 0.3);
+}
+
+.task-list-container.show-both-shadows {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), inset 0 20px 20px -12px rgba(0, 0, 0, 0.3),
+    inset 0 -20px 20px -12px rgba(0, 0, 0, 0.3);
 }
 
 .task-list-container::-webkit-scrollbar {

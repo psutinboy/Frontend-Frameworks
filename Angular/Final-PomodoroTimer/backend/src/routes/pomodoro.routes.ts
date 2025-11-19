@@ -5,6 +5,14 @@ import { authMiddleware, AuthRequest } from '../middleware/auth.middleware';
 
 const router = express.Router();
 
+// Helper function to format date in local timezone
+function getLocalDateKey(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 // Apply auth middleware to all pomodoro routes
 router.use(authMiddleware);
 
@@ -70,12 +78,12 @@ router.get('/stats', async (req: AuthRequest, res: Response): Promise<void> => {
     for (let i = 0; i < 7; i++) {
       const date = new Date(now);
       date.setDate(date.getDate() - i);
-      const dateKey = date.toISOString().split('T')[0];
+      const dateKey = getLocalDateKey(date);
       dailyData[dateKey] = 0;
     }
 
     workSessions.forEach(session => {
-      const dateKey = session.completedAt.toISOString().split('T')[0];
+      const dateKey = getLocalDateKey(session.completedAt);
       if (dailyData.hasOwnProperty(dateKey)) {
         dailyData[dateKey] += 1;
       }

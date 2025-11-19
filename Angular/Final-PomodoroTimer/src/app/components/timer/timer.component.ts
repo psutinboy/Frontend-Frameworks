@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, computed, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PomodoroService } from '../../services/pomodoro.service';
 import { TaskService } from '../../services/task.service';
+import { SoundService } from '../../services/sound.service';
 import { PomodoroType } from '../../models/pomodoro-session.model';
 
 @Component({
@@ -15,6 +16,7 @@ import { PomodoroType } from '../../models/pomodoro-session.model';
 export class TimerComponent implements OnInit, OnDestroy {
   public pomodoroService = inject(PomodoroService);
   public taskService = inject(TaskService);
+  public soundService = inject(SoundService);
   
   // Computed signals from services
   timeRemaining = this.pomodoroService.timeRemaining;
@@ -23,6 +25,9 @@ export class TimerComponent implements OnInit, OnDestroy {
   selectedTaskId = this.pomodoroService.selectedTaskId;
   workSessionsCompleted = this.pomodoroService.workSessionsCompleted;
   tasks = this.taskService.tasks;
+
+  // Volume control state
+  showVolumeSlider = signal<boolean>(false);
 
   // Computed values
   formattedTime = computed(() => this.pomodoroService.getFormattedTime());
@@ -92,6 +97,40 @@ export class TimerComponent implements OnInit, OnDestroy {
         return 'Short Break';
       case 'longBreak':
         return 'Long Break';
+    }
+  }
+
+  // Volume control methods
+  onVolumeChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const volume = parseInt(inputElement.value, 10);
+    this.soundService.setVolume(volume);
+  }
+
+  toggleMute(): void {
+    this.soundService.toggleMute();
+  }
+
+  onVolumeMouseEnter(): void {
+    this.showVolumeSlider.set(true);
+  }
+
+  onVolumeMouseLeave(): void {
+    this.showVolumeSlider.set(false);
+  }
+
+  getVolumeIcon(): string {
+    const volume = this.soundService.volume();
+    const muted = this.soundService.isMuted();
+
+    if (muted || volume === 0) {
+      return 'muted';
+    } else if (volume <= 33) {
+      return 'low';
+    } else if (volume <= 66) {
+      return 'medium';
+    } else {
+      return 'high';
     }
   }
 }

@@ -1,4 +1,9 @@
-<div class="task-list-container">
+<div class="task-list-container"
+     #taskListContainer
+     (scroll)="onScroll()"
+     [class.show-top-shadow]="showTopGradient() && !showBottomGradient()"
+     [class.show-bottom-shadow]="!showTopGradient() && showBottomGradient()"
+     [class.show-both-shadows]="showTopGradient() && showBottomGradient()">
   <div class="task-list-header">
     <h2>Tasks</h2>
     <button class="btn btn-add" (click)="toggleAddForm()">

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, inject } from '@angular/core';
+import { Component, OnInit, signal, computed, inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
@@ -11,7 +11,8 @@ import { Task, TaskFilter, CreateTaskRequest, UpdateTaskRequest } from '../../mo
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, AfterViewInit {
+  @ViewChild('taskListContainer') taskListContainer!: ElementRef<HTMLDivElement>;
   public taskService = inject(TaskService);
   currentFilter = this.taskService.currentFilter;
   
@@ -31,6 +32,10 @@ export class TaskListComponent implements OnInit {
     return taskList;
   });
 
+  // Scroll gradient state
+  showTopGradient = signal(false);
+  showBottomGradient = signal(false);
+
   // Form state
   showAddForm = signal(false);
   editingTaskId = signal<string | null>(null);
@@ -44,12 +49,48 @@ export class TaskListComponent implements OnInit {
     this.loadTasks();
   }
 
+  ngAfterViewInit(): void {
+    // Check initial scroll state after view is initialized
+    setTimeout(() => this.checkScrollGradients(), 0);
+  }
+
+  onScroll(): void {
+    this.checkScrollGradients();
+  }
+
+  private checkScrollGradients(): void {
+    if (!this.taskListContainer) return;
+
+    const element = this.taskListContainer.nativeElement;
+    const scrollTop = element.scrollTop;
+    const scrollHeight = element.scrollHeight;
+    const clientHeight = element.clientHeight;
+    
+    const threshold = 20;
+
+    // Show top gradient if scrolled down from top
+    this.showTopGradient.set(scrollTop > threshold);
+
+    // Show bottom gradient if there's more content below
+    this.showBottomGradient.set(scrollTop < scrollHeight - clientHeight - threshold);
+  }
+
   loadTasks(): void {
-    this.taskService.getTasks(this.currentFilter()).subscribe();
+    this.taskService.getTasks(this.currentFilter()).subscribe({
+      next: () => {
+        // Check gradients after tasks are loaded
+        setTimeout(() => this.checkScrollGradients(), 0);
+      }
+    });
   }
 
   setFilter(filter: TaskFilter): void {
-    this.taskService.getTasks(filter).subscribe();
+    this.taskService.getTasks(filter).subscribe({
+      next: () => {
+        // Check gradients after filter changes
+        setTimeout(() => this.checkScrollGradients(), 0);
+      }
+    });
   }
 
   toggleAddForm(): void {
@@ -91,6 +132,7 @@ export class TaskListComponent implements OnInit {
         next: () => {
           this.resetForm();
           this.editingTaskId.set(null);
+          setTimeout(() => this.checkScrollGradients(), 0);
         }
       });
     } else {
@@ -105,6 +147,7 @@ export class TaskListComponent implements OnInit {
         next: () => {
           this.resetForm();
           this.showAddForm.set(false);
+          setTimeout(() => this.checkScrollGradients(), 0);
         }
       });
     }
@@ -112,12 +155,20 @@ export class TaskListComponent implements OnInit {
 
   deleteTask(id: string): void {
     if (confirm('Are you sure you want to delete this task?')) {
-      this.taskService.deleteTask(id).subscribe();
+      this.taskService.deleteTask(id).subscribe({
+        next: () => {
+          setTimeout(() => this.checkScrollGradients(), 0);
+        }
+      });
     }
   }
 
   toggleComplete(id: string): void {
-    this.taskService.completeTask(id).subscribe();
+    this.taskService.completeTask(id).subscribe({
+      next: () => {
+        setTimeout(() => this.checkScrollGradients(), 0);
+      }
+    });
   }
 
   getProgressPercentage(task: Task): number {

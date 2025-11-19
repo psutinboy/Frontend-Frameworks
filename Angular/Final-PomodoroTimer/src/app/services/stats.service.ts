@@ -42,7 +42,9 @@ export class StatsService {
 
     return {
       labels: entries.map(([date]) => {
-        const d = new Date(date);
+        // Parse as local date to avoid timezone shift
+        const [year, month, day] = date.split('-').map(Number);
+        const d = new Date(year, month - 1, day);
         return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
       }),
       data: entries.map(([_, count]) => count)
